@@ -7,6 +7,7 @@ let tentativas = 1;
 function exibirTextoNaTela(tag, texto){
     let campo = document.querySelector(tag);
     campo.innerHTML = texto;
+    responsiveVoice.speak(texto, 'Brazilian Portuguese Female', {rate:1.2});
 }
 
 function exibirMensagemInicial (){
@@ -14,6 +15,7 @@ function exibirMensagemInicial (){
     exibirTextoNaTela('p', 'Escolha um numero entre 1 e 10');
 }
 
+exibirMensagemInicial ()
 
 function verificaChute(){
     let chute = document.querySelector('input').value;
@@ -30,11 +32,11 @@ function verificaChute(){
         } else {
             exibirTextoNaTela('p', 'O número secreto é maior');
         }
+        tentativas++
+        limparCampo ()
     }
 }
 
-tentativas++
-limparCampo ()
 
 function gerarNumeroAleatorio() {
     let numeroEscolhido = parseInt(Math.random() * numeroLimite + 1);
@@ -51,7 +53,7 @@ function gerarNumeroAleatorio() {
         console.log(ListaDeNumerosSorteados);
         return numeroEscolhido;
     }
-    }
+}
 
 function limparCampo (){
     chute = document.querySelector('input');
@@ -60,7 +62,7 @@ function limparCampo (){
 
 function reiniciarJogo(){
     numeroSecreto = gerarNumeroAleatorio();
-    limparCampo()
+    limparCampo();
     tentativas = 1;
     exibirMensagemInicial();
     document.getElementById('reiniciar').setAttribute('disabled', true)
